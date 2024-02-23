@@ -1,13 +1,10 @@
+version: '3.8'
+
 services:
   dotnetapp:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-      args:
-        USER_ID: ${USER_ID:-1000}
-        GROUP_ID: ${GROUP_ID:-1000}
+    image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
-      - .:/workspace
+      - .:/workspace:rw,z
     ports:
       - "5000:5000"
     command: tail -f /dev/null
