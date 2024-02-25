@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Docker Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",  // Stelle sicher, dass du eine Build-Aufgabe definierst
+            "program": "StringCalculator.Tests/bin/Debug/net8.0/StringCalculator.Tests.dll",  // Passe den Pfad an deine Anwendung an
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "justMyCode": true,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/workspace": "${workspaceFolder}"
+            }
+        }
+    ],
+    
+}

@@ -10,16 +10,33 @@ public class StringCalculator
             return 0;
         }
 
-        var delimiters = new char[] { ',', ';', '\n' };
+        var regex = new Regex("//.*?\n");
+
+        var delimiters = Array.Empty<string>();
+
+        if (regex.IsMatch(numbers)){
+            var splitOuter = regex.Split(numbers);
+            var delimitersString = splitOuter[0][1..splitOuter.Length];
+            delimiters = delimitersString.Split("");
+        } else {
+            delimiters = new string[] { ",", ";", "\n" };
+        }
 
         var delimitersAmount = 0;
 
         foreach (var delimiter in delimiters)
         {
-            delimitersAmount += Regex.Matches(numbers, delimiter.ToString()).Count;
+            delimitersAmount += Regex.Matches(numbers, delimiter).Count;
         }
         
-        var split = numbers.Split(delimiters);
+        var charSplit = new char[delimiters.Length];
+
+        for (int i = 0; i < delimiters.Length; i++)
+        {
+            charSplit[i] = delimiters[i].ToCharArray()[0];
+        }
+
+        var split = numbers.Split(charSplit);
 
         if (delimitersAmount != split.Length - 1){
             throw new FormatException("The input string does not have the expected format.");

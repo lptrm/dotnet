@@ -2,9 +2,12 @@ version: '3.8'
 
 services:
   dotnetapp:
-    image: mcr.microsoft.com/dotnet/sdk:6.0
+    image: mcr.microsoft.com/dotnet/sdk:8.0
     volumes:
       - .:/workspace:rw,z
     ports:
       - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
     command: tail -f /dev/null
