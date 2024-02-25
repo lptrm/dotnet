@@ -67,4 +67,25 @@ public class StringCalculatorTest
         // Then
         Assert.Equal(6, result);
     }
+    
+    [Fact]
+    public void GivenString2AndNewline3_whenAdd_thenThrowsException()
+    {
+        // Given
+        var calculator = new StringCalculator();
+        // When Then
+        Assert.Throws<FormatException> (() => calculator.Add("2,\n3"));
+    }
+
+    [Fact]
+    public void GivenDelimitersAnd1Semicolon2_whenAdd_thenResultIs3()
+    {
+        // Given
+        var calculator = new StringCalculator();
+        var input = "//;\n1;2";   
+        // When
+        var result = calculator.Add(input);
+        // Then
+        Assert.Equal(3, result);
+    }
 }
