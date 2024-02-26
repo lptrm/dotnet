@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace String.Calculator.Tests;
 
 public class StringCalculatorTest
@@ -5,10 +7,11 @@ public class StringCalculatorTest
     [Fact]
     public void GivenEmptyString_whenAdd_thenResultIs0()
     {
-        // Arrange
+        // Given
         var calculator = new StringCalculator();
-        // Act
-        var result = calculator.Add("");
+        var intput = "";
+        // When
+        var result = calculator.Add(intput);
         // Assert
         Assert.Equal(0, result);
     }
@@ -18,67 +21,73 @@ public class StringCalculatorTest
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "1";
         // When
-        var result = calculator.Add("1");
+        var result = calculator.Add(input);
         // Then
         Assert.Equal(1, result);
     }
 
     [Fact]
-    public void GivenString1And2_whenAdd_thenResultIs3()
+    public void GivenString1Comma2_whenAdd_thenResultIs3()
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "1,2";
         // When
-        var result = calculator.Add("1,2");
+        var result = calculator.Add(input);
         // Then
         Assert.Equal(3, result);
     }
 
        [Fact]
-    public void GivenString1And2And3_whenAdd_thenResultIs6()
+    public void GivenString1Comma2Comma3_whenAdd_thenResultIs6()
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "1,2,3";
         // When
-        var result = calculator.Add("1,2,3");
+        var result = calculator.Add(input);
         // Then
         Assert.Equal(6, result);
     }
 
        [Fact]
-    public void GivenString1And2And3And4_whenAdd_thenResultIs10()
+    public void GivenString1Comma2Comma3Comma4_whenAdd_thenResultIs10()
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "1,2,3,4";
         // When
-        var result = calculator.Add("1,2,3,4");
+        var result = calculator.Add(input);
         // Then
         Assert.Equal(10, result);
     }
 
        [Fact]
-    public void GivenString1And2AndNewlineAnd3_whenAdd_thenResultIs6()
+    public void GivenString1Comma2Newline3_whenAdd_thenResultIs6()
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "1,2\n3";
         // When
-        var result = calculator.Add("1,2\n3");
+        var result = calculator.Add(input);
         // Then
         Assert.Equal(6, result);
     }
     
     [Fact]
-    public void GivenString2AndNewline3_whenAdd_thenThrowsException()
+    public void GivenString2Newline3_whenAdd_thenThrowsException()
     {
         // Given
         var calculator = new StringCalculator();
+        var input = "2,\n3";
         // When Then
-        Assert.Throws<FormatException> (() => calculator.Add("2,\n3"));
+        Assert.Throws<FormatException> (() => calculator.Add(input));
     }
 
     [Fact]
-    public void GivenDelimitersAnd1Semicolon2_whenAdd_thenResultIs3()
+    public void GivenDelimiters1Semicolon2_whenAdd_thenResultIs3()
     {
         // Given
         var calculator = new StringCalculator();
@@ -88,4 +97,17 @@ public class StringCalculatorTest
         // Then
         Assert.Equal(3, result);
     }
+
+    [Fact]
+    public void GivenDelimiters1Bar2Bar3_whenAdd_thenResultIs6()
+    {
+        // Given
+        var calculator = new StringCalculator();
+        var input = "//|\n1|2|3";   
+        // When
+        var result = calculator.Add(input);
+        // Then
+        Assert.Equal(6, result);
+    }
+
 }
