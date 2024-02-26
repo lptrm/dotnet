@@ -15,11 +15,12 @@ public class StringCalculator
         var delimiters = Array.Empty<string>();
 
         if (regex.IsMatch(numbers)){
-            var splitOuter = regex.Split(numbers);
-            var delimitersString = splitOuter[0][1..splitOuter.Length];
+            var delimitersStringRaw = regex.Match(numbers).Value;
+            var delimitersString = delimitersStringRaw[2..(delimitersStringRaw.Length-1)];
             delimiters = delimitersString.Split("");
+            numbers = regex.Replace(numbers, "");
         } else {
-            delimiters = new string[] { ",", ";", "\n" };
+            delimiters = [",", ";", "\n"];
         }
 
         var delimitersAmount = 0;

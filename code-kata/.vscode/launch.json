@@ -5,8 +5,8 @@
             "name": ".NET Core Docker Debug",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",  // Stelle sicher, dass du eine Build-Aufgabe definierst
-            "program": "StringCalculator.Tests/bin/Debug/net8.0/StringCalculator.Tests.dll",  // Passe den Pfad an deine Anwendung an
+            "preLaunchTask": "build",
+            "program": "StringCalculator.Tests/bin/Debug/net8.0/StringCalculator.Tests.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

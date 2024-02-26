@@ -20,6 +20,22 @@
                 "reveal": "always",
                 "panel": "shared"
             }
-        }
+        }, 
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/StringCalculator.Tests/StringCalculator.Tests.csproj",
+                "/property:GenerateFullPaths=true"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }        
     ]
 }
