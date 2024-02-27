@@ -118,7 +118,9 @@ public class StringCalculatorTest
         // Given
         var input = "//|\n1|2;3";   
         // When Then
-        Assert.Throws<FormatException> (() => StringCalculator.Add(input));
+        var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
+        Assert.Equal("The input String does not have the expected format. Expected \\ but instead ; found at position 3.", ex.Message);
+
     }
 
 }

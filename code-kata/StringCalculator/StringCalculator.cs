@@ -14,6 +14,7 @@ public class StringCalculator
         string[] delimiters = [",", "\n"];
 
         var match = Regex.Match(numbers, @"^//(.*)\n");
+
         if (match.Success)
         {
             delimiters = [Regex.Escape(match.Groups[1].Value)];
@@ -31,9 +32,23 @@ public class StringCalculator
             delimitersAmount += Regex.Matches(numbers, delimiter).Count;
         }
 
-        if (delimitersAmount != tokens.Length - 1){
-            throw new FormatException("The input string does not have the expected format.");
+        var position = 0;
+
+        foreach (var token in tokens)
+        {
+            if (!Regex.IsMatch(token, @"^\d+$"))
+            {
+                if (Regex.IsMatch(token, @"^\d+[^0-9]\d+"))
+                {
+                    var falseSeparatorMatch = Regex.Match(token, "[^0-9]");
+                    var exceptionString = $"The input String does not have the expected format. Expected {delimiters[0][..1]} but instead {falseSeparatorMatch.Value} found at position {position + 1}.";
+                    throw new FormatException(exceptionString);
+                }
+                throw new FormatException("The input string does not have the expected format.");
+            }
+            position += token.Length + 1;
         }
+
 
         var result = 0;
 
@@ -41,7 +56,7 @@ public class StringCalculator
         {
             result += int.Parse(tokens[i]);
         }
-        
+
 
         return result;
     }
