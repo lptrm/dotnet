@@ -2,6 +2,9 @@
 using System.Text.RegularExpressions;
 
 namespace String.Calculator;
+
+// https://tddmanifesto.com/exercises/
+// TODO: 6, 7, 8
 public class StringCalculator
 {
     public static int Add(string numbers)
