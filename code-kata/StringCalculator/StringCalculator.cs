@@ -4,14 +4,14 @@ using System.Text.RegularExpressions;
 namespace String.Calculator;
 public class StringCalculator
 {
-    public int Add(string numbers)
+    public static int Add(string numbers)
     {
         if (string.IsNullOrWhiteSpace(numbers))
         {
             return 0;
         }
 
-        string[] delimiters = { ",", "\n" };
+        string[] delimiters = [",", "\n"];
 
         var match = Regex.Match(numbers, @"^//(.*)\n");
         if (match.Success)
@@ -20,9 +20,9 @@ public class StringCalculator
             numbers = numbers[match.Length..];
         }
 
-        string pattern = string.Join("|", delimiters);
+        var pattern = string.Join("|", delimiters);
 
-        string[] tokens = Regex.Split(numbers, pattern);
+        var tokens = Regex.Split(numbers, pattern);
 
         var delimitersAmount = 0;
 

@@ -8,10 +8,9 @@ public class StringCalculatorTest
     public void GivenEmptyString_whenAdd_thenResultIs0()
     {
         // Given
-        var calculator = new StringCalculator();
         var intput = "";
         // When
-        var result = calculator.Add(intput);
+        var result = StringCalculator.Add(intput);
         // Assert
         Assert.Equal(0, result);
     }
@@ -20,10 +19,9 @@ public class StringCalculatorTest
     public void GivenString1_whenAdd_thenResultIs1()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "1";
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(1, result);
     }
@@ -32,10 +30,9 @@ public class StringCalculatorTest
     public void GivenString1Comma2_whenAdd_thenResultIs3()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "1,2";
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(3, result);
     }
@@ -44,10 +41,9 @@ public class StringCalculatorTest
     public void GivenString1Comma2Comma3_whenAdd_thenResultIs6()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "1,2,3";
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(6, result);
     }
@@ -56,10 +52,9 @@ public class StringCalculatorTest
     public void GivenString1Comma2Comma3Comma4_whenAdd_thenResultIs10()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "1,2,3,4";
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(10, result);
     }
@@ -68,10 +63,9 @@ public class StringCalculatorTest
     public void GivenString1Comma2Newline3_whenAdd_thenResultIs6()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "1,2\n3";
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(6, result);
     }
@@ -80,34 +74,51 @@ public class StringCalculatorTest
     public void GivenString2Newline3_whenAdd_thenThrowsException()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "2,\n3";
         // When Then
-        Assert.Throws<FormatException> (() => calculator.Add(input));
+        Assert.Throws<FormatException> (() => StringCalculator.Add(input));
     }
 
     [Fact]
-    public void GivenDelimiters1Semicolon2_whenAdd_thenResultIs3()
+    public void GivenDelimitersSemicolonOps1Semicolon2_whenAdd_thenResultIs3()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "//;\n1;2";   
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(3, result);
     }
 
     [Fact]
-    public void GivenDelimiters1Bar2Bar3_whenAdd_thenResultIs6()
+    public void GivenDelimiterBarOps1Bar2Bar3_whenAdd_thenResultIs6()
     {
         // Given
-        var calculator = new StringCalculator();
         var input = "//|\n1|2|3";   
         // When
-        var result = calculator.Add(input);
+        var result = StringCalculator.Add(input);
         // Then
         Assert.Equal(6, result);
+    }
+
+    [Fact]
+    public void GivenDelimiterSepOps2sep5_whenAdd_thenResultIs7()
+    {
+        // Given
+        var input = "//sep\n2sep5";   
+        // When
+        var result = StringCalculator.Add(input);
+        // Then
+        Assert.Equal(7, result);
+    }
+
+    [Fact]
+    public void GivenDelimiterBarOps1Bar2Semicolon5_whenAdd_thenThrowsException()
+    {
+        // Given
+        var input = "//|\n1|2;3";   
+        // When Then
+        Assert.Throws<FormatException> (() => StringCalculator.Add(input));
     }
 
 }
