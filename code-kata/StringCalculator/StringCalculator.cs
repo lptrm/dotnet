@@ -46,6 +46,8 @@ public class StringCalculator
                     var falseSeparatorMatch = Regex.Match(token, "[^0-9]");
                     var exceptionString = $"The input String does not have the expected format. Expected {delimiters[0][..1]} but instead {falseSeparatorMatch.Value} found at position {position + 1}.";
                     throw new FormatException(exceptionString);
+                } else if (Regex.IsMatch(token, @"^-\d+")) {
+                    throw new FormatException($"The input String does not have the expected format. Negative numbers are not allowed: {token}");
                 }
                 throw new FormatException("The input string does not have the expected format.");
             }
