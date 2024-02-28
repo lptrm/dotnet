@@ -119,7 +119,7 @@ public class StringCalculatorTest
         var input = "//|\n1|2;3";   
         // When Then
         var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
-        Assert.Equal("The input String does not have the expected format. Expected \\ but instead ; found at position 3.", ex.Message);
+        Assert.Equal("Expected \\ but instead ; found at position 3.", ex.Message);
 
     }
     
@@ -130,7 +130,18 @@ public class StringCalculatorTest
         var input = "1,-2";   
         // When Then
         var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
-        Assert.Equal("The input String does not have the expected format. Negative numbers are not allowed: -2", ex.Message);
+        Assert.Equal("Negative numbers are not allowed: -2", ex.Message);
+
+    }
+    
+    [Fact]
+    public void Given2CommaMinus4CommaMinus9_whenAdd_thenThrowsException()
+    {
+        // Given
+        var input = "2,-4,-9";   
+        // When Then
+        var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
+        Assert.Equal("Negative numbers are not allowed: -4, -9", ex.Message);
 
     }
 }

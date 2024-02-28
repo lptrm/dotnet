@@ -1,4 +1,6 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Collections;
+using System.Reflection.Metadata.Ecma335;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace String.Calculator;
@@ -36,24 +38,41 @@ public class StringCalculator
         }
 
         var position = 0;
+        var stringBuilder = new StringBuilder();
+        var negatives = new ArrayList();
 
         foreach (var token in tokens)
         {
             if (!Regex.IsMatch(token, @"^\d+$"))
-            {
+            {   
                 if (Regex.IsMatch(token, @"^\d+[^0-9]\d+"))
                 {
-                    var falseSeparatorMatch = Regex.Match(token, "[^0-9]");
-                    var exceptionString = $"The input String does not have the expected format. Expected {delimiters[0][..1]} but instead {falseSeparatorMatch.Value} found at position {position + 1}.";
-                    throw new FormatException(exceptionString);
+                    stringBuilder.Append($"Expected {delimiters[0][..1]} but instead {Regex.Match(token, "[^0-9]").Value} found at position {position + 1}.");
                 } else if (Regex.IsMatch(token, @"^-\d+")) {
-                    throw new FormatException($"The input String does not have the expected format. Negative numbers are not allowed: {token}");
+                    negatives.Add(token);
                 }
-                throw new FormatException("The input string does not have the expected format.");
             }
             position += token.Length + 1;
         }
 
+        var errorMessage = stringBuilder.ToString();
+
+        if(negatives.Count != 0){
+            stringBuilder.Clear();
+            if(!string.IsNullOrEmpty(errorMessage)){
+                stringBuilder.Append('\n');
+            }
+            stringBuilder.Append($"Negative numbers are not allowed:");
+            foreach(var negative in negatives){
+                stringBuilder.Append($" {negative},");
+            }
+            var errorString = stringBuilder.ToString();
+            errorMessage += errorString[..(errorString.Length - 1)];
+        }
+
+        if (!string.IsNullOrEmpty(errorMessage)){
+            throw new FormatException(errorMessage);
+        }
 
         var result = 0;
 
