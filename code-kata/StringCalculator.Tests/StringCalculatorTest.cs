@@ -122,5 +122,14 @@ public class StringCalculatorTest
         Assert.Equal("The input String does not have the expected format. Expected \\ but instead ; found at position 3.", ex.Message);
 
     }
+       [Fact]
+    public void GivenDelimiterBarOps1Bar2Semicolon5_whenAdd_thenThrowsException2()
+    {
+        // Given
+        var input = "//|\n1|2;3";   
+        // When Then
+        var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
+        Assert.Equal("The input Sdasdastring does not have the expected format. Expected \\ but instead ; found at position 3.", ex.Message);
 
+    }
 }
