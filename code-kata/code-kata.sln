@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordInputFieldValidatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordInputFieldValidation.Tests", "PasswordInputFieldValidation.Tests\PasswordInputFieldValidation.Tests.csproj", "{BD97852B-F31B-4AD7-9D35-8646CE6BB030}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchFunctionality", "SearchFunctionality\SearchFunctionality.csproj", "{63AC8F83-52A8-4F05-B811-3E88626C28AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchFunctionality.Tests", "SearchFunctionality.Tests\SearchFunctionality.Tests.csproj", "{06C6DBB6-BC89-4B38-BA39-DDD57160B424}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,13 @@ Global
 		{BD97852B-F31B-4AD7-9D35-8646CE6BB030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD97852B-F31B-4AD7-9D35-8646CE6BB030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD97852B-F31B-4AD7-9D35-8646CE6BB030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AC8F83-52A8-4F05-B811-3E88626C28AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AC8F83-52A8-4F05-B811-3E88626C28AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AC8F83-52A8-4F05-B811-3E88626C28AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AC8F83-52A8-4F05-B811-3E88626C28AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C6DBB6-BC89-4B38-BA39-DDD57160B424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C6DBB6-BC89-4B38-BA39-DDD57160B424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C6DBB6-BC89-4B38-BA39-DDD57160B424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C6DBB6-BC89-4B38-BA39-DDD57160B424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
