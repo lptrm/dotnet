@@ -154,4 +154,14 @@ public class StringCalculatorTest
         Assert.Equal("Expected \\ but instead , found at position 3.\nNegative numbers are not allowed: -3", ex.Message);
 
     }
+    [Fact]
+    public void Given2Comma1000_whenAdd_thenResultIs2()
+    {
+        // Given
+        var input = "2,1000";   
+        // When
+        var result = StringCalculator.Add(input);
+        // Then
+        Assert.Equal(2, result);
+    }
 }

@@ -49,7 +49,7 @@ public class StringCalculator
                 {
                     stringBuilder.Append($"Expected {delimiters[0][..1]} but instead {Regex.Match(token, "[^0-9]").Value} found at position {position + 1}.");
                 } 
-                
+
                 var negativeMatches = Regex.Matches(token, @"-\d+");
                 if (negativeMatches.Count != 0) {
                     foreach(var negativeMatch in negativeMatches){
@@ -83,7 +83,10 @@ public class StringCalculator
 
         for (int i = 0; i < tokens.Length; i++)
         {
-            result += int.Parse(tokens[i]);
+            var intRepresentation = int.Parse(tokens[i]);
+            if(intRepresentation < 1000){
+                result += int.Parse(tokens[i]);
+            }
         }
 
 
