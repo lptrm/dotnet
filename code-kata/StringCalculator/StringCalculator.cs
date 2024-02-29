@@ -32,13 +32,6 @@ public partial class StringCalculator
 
         var tokens = Regex.Split(numbers, pattern);
 
-        var delimitersAmount = 0;
-
-        foreach (var delimiter in delimiters)
-        {
-            delimitersAmount += Regex.Matches(numbers, delimiter).Count;
-        }
-
         var position = 0;
         var stringBuilder = new StringBuilder();
         var negatives = new List<string>();
