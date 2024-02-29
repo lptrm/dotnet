@@ -144,4 +144,14 @@ public class StringCalculatorTest
         Assert.Equal("Negative numbers are not allowed: -4, -9", ex.Message);
 
     }
+    [Fact]
+    public void GivenDelimiterBarr1Bar2CommaMinus3_whenAdd_thenThrowsException()
+    {
+        // Given
+        var input = "//|\n1|2,-3";   
+        // When Then
+        var ex = Assert.Throws<FormatException> (() => StringCalculator.Add(input));
+        Assert.Equal("Expected \\ but instead , found at position 3.\nNegative numbers are not allowed: -3", ex.Message);
+
+    }
 }

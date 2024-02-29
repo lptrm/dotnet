@@ -45,11 +45,16 @@ public class StringCalculator
         {
             if (!Regex.IsMatch(token, @"^\d+$"))
             {   
-                if (Regex.IsMatch(token, @"^\d+[^0-9]\d+"))
+                if (Regex.IsMatch(token, @"^-?\d+[^0-9]-?\d+$"))
                 {
                     stringBuilder.Append($"Expected {delimiters[0][..1]} but instead {Regex.Match(token, "[^0-9]").Value} found at position {position + 1}.");
-                } else if (Regex.IsMatch(token, @"^-\d+")) {
-                    negatives.Add(token);
+                } 
+                
+                var negativeMatches = Regex.Matches(token, @"-\d+");
+                if (negativeMatches.Count != 0) {
+                    foreach(var negativeMatch in negativeMatches){
+                        negatives.Add(negativeMatch);
+                    }
                 }
             }
             position += token.Length + 1;
