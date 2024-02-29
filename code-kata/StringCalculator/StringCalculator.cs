@@ -7,18 +7,20 @@ namespace String.Calculator;
 
 // https://tddmanifesto.com/exercises/
 // TODO: 6, 7, 8
-public class StringCalculator
+public partial class StringCalculator
 {
     public static int Add(string numbers)
     {
+        var result = 0;
+
         if (string.IsNullOrWhiteSpace(numbers))
         {
-            return 0;
+            return result;
         }
 
         string[] delimiters = [",", "\n"];
 
-        var match = Regex.Match(numbers, @"^//(.*)\n");
+        var match = delimiterRegex().Match(numbers);
 
         if (match.Success)
         {
@@ -39,57 +41,72 @@ public class StringCalculator
 
         var position = 0;
         var stringBuilder = new StringBuilder();
-        var negatives = new ArrayList();
+        var negatives = new List<string>();
 
         foreach (var token in tokens)
         {
-            if (!Regex.IsMatch(token, @"^\d+$"))
-            {   
-                if (Regex.IsMatch(token, @"^-?\d+[^0-9]-?\d+$"))
+            if (!validTokenRegex().IsMatch(token))
+            {
+                var errorReason = false;
+                if (delimiterErrorRegex().IsMatch(token))
                 {
-                    stringBuilder.Append($"Expected {delimiters[0][..1]} but instead {Regex.Match(token, "[^0-9]").Value} found at position {position + 1}.");
-                } 
+                    stringBuilder.Append($"Expected {delimiters[0][..1]} but instead {noNumberRegex().Match(token).Value} found at position {position + 1}.");
+                    errorReason = true;
+                }
 
-                var negativeMatches = Regex.Matches(token, @"-\d+");
-                if (negativeMatches.Count != 0) {
-                    foreach(var negativeMatch in negativeMatches){
-                        negatives.Add(negativeMatch);
+                var negativeMatches = negativeErrorRegex().Matches(token);
+                if (negativeMatches.Count != 0)
+                {
+                    foreach (var negativeMatch in negativeMatches)
+                    {
+                        negatives.Add(negativeMatch.ToString());
                     }
+                    errorReason = true;
+                }
+                if (!errorReason)
+                {
+                    stringBuilder.Append("Format does not fit!");
+                }
+            }
+            else
+            {
+                var intRepresentation = int.Parse(token);
+                if (intRepresentation < 1000)
+                {
+                    result += intRepresentation;
                 }
             }
             position += token.Length + 1;
         }
 
-        var errorMessage = stringBuilder.ToString();
-
-        if(negatives.Count != 0){
-            stringBuilder.Clear();
-            if(!string.IsNullOrEmpty(errorMessage)){
+        if (negatives.Count != 0)
+        {
+            if (!string.IsNullOrEmpty(stringBuilder.ToString()))
+            {
                 stringBuilder.Append('\n');
             }
-            stringBuilder.Append($"Negative numbers are not allowed:");
-            foreach(var negative in negatives){
-                stringBuilder.Append($" {negative},");
-            }
-            var errorString = stringBuilder.ToString();
-            errorMessage += errorString[..(errorString.Length - 1)];
+            stringBuilder.Append($"Negative numbers are not allowed: ");
+            stringBuilder.Append(string.Join(", ", negatives));
         }
 
-        if (!string.IsNullOrEmpty(errorMessage)){
+        var errorMessage = stringBuilder.ToString();
+
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
             throw new FormatException(errorMessage);
         }
 
-        var result = 0;
-
-        for (int i = 0; i < tokens.Length; i++)
-        {
-            var intRepresentation = int.Parse(tokens[i]);
-            if(intRepresentation < 1000){
-                result += int.Parse(tokens[i]);
-            }
-        }
-
-
         return result;
     }
+
+    [GeneratedRegex(@"^//(.*)\n")]
+    private static partial Regex delimiterRegex();
+    [GeneratedRegex(@"^\d+$")]
+    private static partial Regex validTokenRegex();
+    [GeneratedRegex(@"^-?\d+[^0-9]-?\d+$")]
+    private static partial Regex delimiterErrorRegex();
+    [GeneratedRegex(@"-\d+")]
+    private static partial Regex negativeErrorRegex();
+    [GeneratedRegex("[^0-9]")]
+    private static partial Regex noNumberRegex();
 }
