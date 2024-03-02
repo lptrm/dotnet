@@ -1,0 +1,23 @@
+name: Matrix Build and Test for Multiple Solutions
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solution: ['application/application.sln', 'code-kata/code-kata.sln', 'seks-tdd/seks-tdd.sln']
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0'
+
+    - name: Restore dependencies, Build and Test
+      run: |
+        dotnet restore ${{ matrix.solution }}
+        dotnet build --no-restore ${{ matrix.solution }}
+        # Add dotnet test command if applicable
