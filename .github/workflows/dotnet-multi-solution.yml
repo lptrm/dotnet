@@ -1,3 +1,7 @@
+name: Matrix Build and Test for Multiple Solutions
+
+on: [push]
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
