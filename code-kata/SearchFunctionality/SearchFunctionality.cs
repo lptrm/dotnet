@@ -15,13 +15,14 @@ public class SearchFunctionality
     public SearchFunctionality Search(string input)
     {
         input = input.Trim();
-        if (string.IsNullOrEmpty(input) || input.Length < 2)
-        {
-            return this;
-        }
         if (input.Equals("*"))
         {
             SearchResult.AddRange(DB);
+            return this;
+        }
+        if (string.IsNullOrEmpty(input) || input.Length < 2)
+        {
+            return this;
         }
         SearchResult = DB.Where(city => city.StartsWith(input, StringComparison.CurrentCultureIgnoreCase)
                                         || city.Contains(input, StringComparison.CurrentCultureIgnoreCase)).ToList();

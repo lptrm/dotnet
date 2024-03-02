@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "StringCalculator.Tests/bin/Debug/net8.0/StringCalculator.Tests.dll",
+            "program": "SearchFunctionality.Tests/bin/Debug/net8.0/SearchFunctionality.Tests.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

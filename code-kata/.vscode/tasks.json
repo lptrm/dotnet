@@ -2,40 +2,29 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build solution",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/StringCalculator.Tests/StringCalculator.Tests.csproj", // Pfad zum CSProj deines Tests
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "${workspaceFolder}/YourSolutionName.sln"
             ],
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
             }
-        }, 
+        },
         {
-            "label": "test",
+            "label": "test solution",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "test",
-                "${workspaceFolder}/StringCalculator.Tests/StringCalculator.Tests.csproj",
-                "/property:GenerateFullPaths=true"
+                "${workspaceFolder}/YourSolutionName.sln"
             ],
             "problemMatcher": "$msCompile",
-            "group": "test",
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        }        
+            "group": "test"
+        }
     ]
 }
