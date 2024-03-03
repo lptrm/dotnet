@@ -3,9 +3,11 @@
 public class PointOfSale
 {
     public string Amount { get; private set; }
+    private string ErrorMessage { get; set; }
     public PointOfSale()
     {
         Amount = "";
+        ErrorMessage = "";
     }
     public string Scan(string barCode)
     {
@@ -28,10 +30,14 @@ public class PointOfSale
                 intAmount += GetIntFromBarCode(barCode);
             }
         }
-        if (!Amount.StartsWith("Error"))
+        if (!string.IsNullOrEmpty(ErrorMessage))
         {
             var stringRep = intAmount.ToString();
             Amount = $"${stringRep[..(stringRep.Length - 2)]}.{stringRep[(stringRep.Length - 2)..]}";
+        }
+        else
+        {
+            Amount = ErrorMessage;
         }
 
         return Amount;
@@ -52,13 +58,13 @@ public class PointOfSale
     }
     private void SetErrorMessage(string errorMessage)
     {
-        if (Amount.StartsWith("Error"))
+        if (ErrorMessage.StartsWith("Error"))
         {
-            Amount += "\n" + errorMessage;
+            ErrorMessage += "\n" + errorMessage;
         }
         else
         {
-            Amount = errorMessage;
+            ErrorMessage = errorMessage;
         }
     }
 
