@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/YourSolutionName.sln"
+                "${workspaceFolder}/code-kata.sln"
             ],
             "problemMatcher": "$msCompile",
             "group": {
@@ -21,7 +21,7 @@
             "type": "process",
             "args": [
                 "test",
-                "${workspaceFolder}/YourSolutionName.sln"
+                "${workspaceFolder}/code-kata.sln"
             ],
             "problemMatcher": "$msCompile",
             "group": "test"

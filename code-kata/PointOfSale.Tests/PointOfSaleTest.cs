@@ -56,7 +56,6 @@ public class PointOfSaleTest
         //When
         var result = pointOfSale.Scan(input);
         //Then
-        // Assert.Equal("$19.75", result);
-        Assert.True(true);
+        Assert.Equal("$19.75", result);
     }
 }
