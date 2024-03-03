@@ -30,7 +30,7 @@ public class PointOfSale
                 intAmount += GetIntFromBarCode(barCode);
             }
         }
-        if (!string.IsNullOrEmpty(ErrorMessage))
+        if (string.IsNullOrEmpty(ErrorMessage))
         {
             var stringRep = intAmount.ToString();
             Amount = $"${stringRep[..(stringRep.Length - 2)]}.{stringRep[(stringRep.Length - 2)..]}";
