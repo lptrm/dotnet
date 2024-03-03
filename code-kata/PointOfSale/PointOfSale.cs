@@ -51,7 +51,7 @@ public class PointOfSale
         }
         if (string.IsNullOrEmpty(barCode))
         {
-            SetErrorMessage("Error: emtpy barcode");
+            SetErrorMessage("Error: empty barcode");
             return false;
         }
         return true;
